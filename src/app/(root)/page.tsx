@@ -7,7 +7,9 @@ const Home = () => {
 	return (
 		<section className="home">
 			<div className="home-content">
-				<header className="home-header">
+				<header
+					className="home-header"
+				>
 					{/* user Details */}
 					<HeaderBox
 						title="welcome"
