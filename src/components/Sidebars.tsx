@@ -10,22 +10,29 @@ const Sidebars = ({ user }: SiderbarProps) => {
 
 	return (
 		<section className="sidebar">
-			<nav>
-				<Link href={'/'} className="flex flex-col gap-5">
+			<nav className="flex flex-col gap-4">
+				<Link href={'/'} className="flex mb-12 gap-2 items-center">
 					<Image src={'icons/logo.svg'} alt="Logo" width={30} height={30} />
 					<h1 className="sidebar-logo">swift</h1>
 				</Link>
 				{sidebarLinks.map((links) => {
 					const isActive = pathName === links.route || pathName?.startsWith(`${links.route}/`);
-					console.log(isActive);
 
 					return (
 						<Link
 							key={links.label}
 							href={links.route}
-							className={cn('sidebar-links', { 'bg-bank-gradient': isActive })}
+							className={cn('sidebar-link', { 'bg-bank-gradient': isActive })}
 						>
-							<div>{links.label}</div>
+							<div className="relative size-6">
+								<Image
+									src={links.imgURL}
+									alt={links.label}
+									fill
+									className={cn({ 'brightness-[3] invert-0': isActive })}
+								/>
+							</div>
+							<p className={cn('sidebar-label', { '!text-white': isActive })}>{links.label}</p>
 						</Link>
 					);
 				})}
