@@ -4,7 +4,7 @@ import DoughnutChart from './DoughnutChart';
 const transactionbox = ({
 	accounts = [],
 	totalBanks = 1,
-	totalCurrentBalance = 1000,
+	totalCurrentBalance = 0,
 }: TotlaBalanceBoxProps) => {
 	return (
 		<section className="total-balance">

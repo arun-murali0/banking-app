@@ -7,9 +7,7 @@ const Home = () => {
 	return (
 		<section className="home">
 			<div className="home-content">
-				<header
-					className="home-header"
-				>
+				<header className="home-header">
 					{/* user Details */}
 					<HeaderBox
 						title="welcome"
@@ -19,7 +17,7 @@ const Home = () => {
 					/>
 
 					{/* balance details */}
-					<Transactionbox />
+					<Transactionbox accounts={[]} totalCurrentBalance={4211.32} totalBanks={2} />
 				</header>
 			</div>
 		</section>
