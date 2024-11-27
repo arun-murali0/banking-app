@@ -2,25 +2,20 @@ import Link from 'next/link';
 import Image from 'next/image';
 import BankCard from './BankCard';
 
-const RightSidebar = ({ transactions, banks, user }: RightSidebarProps) => {
+const RightSidebar = async ({ transactions, banks, user }: RightSidebarProps) => {
 	return (
 		<aside className="right-sidebar">
 			{/* user detail */}
-
 			<section className="flex flex-col pb-8">
 				<div className="profile-banner">
 					<div className="profile">
 						<div className="profile-img">
-							<span className="text-5xl font-bold text-bankGradient">{user.firstName[0]}</span>
+							<span className="text-5xl font-bold text-bankGradient">{user?.name[0]}</span>
 						</div>
 					</div>
 				</div>
 				<div className="profile-details mx-6">
-					<div className="profile-name">
-						{user.firstName}
-						{user.lastName}
-					</div>
-					<div className="profile-email">{user.email}</div>
+					<div className="profile-name">{user?.name}</div>
 				</div>
 			</section>
 

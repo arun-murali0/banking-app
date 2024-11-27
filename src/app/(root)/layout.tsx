@@ -4,22 +4,22 @@ import { ReactNode } from 'react';
 import MobileNavbar from '@/components/MobileNavbar';
 import RightSidebar from '@/components/RightSidebar';
 
-export default function layout({ children }: { children: ReactNode }) {
-	const isLogged = { firstName: 'Arun', email: 'arun@gmail.com', lastName: 'karthick' };
+export default async function layout({ children }: { children: ReactNode }) {
+	const isLogged = { name: ' arun ' };
 
 	return (
 		<main className="flex h-screen w-full font-inter">
-			<Sidebars user={isLogged.firstName} />
+			<Sidebars user={isLogged} />
 			<div className="flex flex-col size-full">
 				<div className="root-layout">
 					<Image src={'/icons/logo.svg'} width={20} height={20} alt="menu-icon" />
 					<div>
-						<MobileNavbar user={isLogged.firstName} banks={[{}]} />
+						<MobileNavbar user={isLogged} />
 					</div>
 				</div>
 				{children}
 			</div>
-			<RightSidebar user={isLogged} />
+			<RightSidebar user={isLogged} transactions={[]} banks={[]} />
 		</main>
 	);
 }

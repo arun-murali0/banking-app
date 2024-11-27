@@ -185,11 +185,11 @@ export const LoginForm = (type: string) =>
 		lastname: type === 'register' ? z.string().min(3,{message:"should be atleast 3 character"}) : z.string().optional(),
 		city:
 			type === 'register'
-				? z.string().min(50, { message: 'Enter valid Address' })
+				? z.string().max(50, { message: 'Enter valid Address' })
 				: z.string().optional(),
 		state:
 			type === 'register'
-				? z.string().min(2).max(5, { message: 'enter valid state' })
+				? z.string().min(2, { message: 'enter valid state' })
 				: z.string().optional(),
 		postalcode:
 			type === 'register'

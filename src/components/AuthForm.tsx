@@ -28,7 +28,7 @@ const AuthForm = ({ type }: { type: string }) => {
 				<div className="flex flex-col gap-4"></div>
 			) : (
 				<>
-					<Form user={user} type={type} />
+					<Form user={user} type={type} setUser={setUser}/>
 				</>
 			)}
 		</section>

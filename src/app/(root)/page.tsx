@@ -1,9 +1,9 @@
 import HeaderBox from '@/components/HeaderBox';
 import Transactionbox from '@/components/transactionbox';
+import { getLoggedInUser } from '@/server-actions/index.action';
 
-const Home = () => {
-	const isLogged = { firstname: 'Arun' };
-
+const Home = async () => {
+	const isLogged = await getLoggedInUser();
 	return (
 		<section className="home">
 			<div className="home-content">
@@ -11,7 +11,7 @@ const Home = () => {
 					{/* user Details */}
 					<HeaderBox
 						title="welcome"
-						user={isLogged.firstname || 'guest'}
+						user={isLogged?.name || 'guest'}
 						type="greeting"
 						subtext="admin"
 					/>
