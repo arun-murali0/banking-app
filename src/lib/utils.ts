@@ -181,28 +181,28 @@ export const getTransactionStatus = (date: Date) => {
 
 export const LoginForm = (type: string) =>
 	z.object({
-		firstname: type === 'register' ? z.string().optional() : z.string().min(3),
-		lastname: type === 'register' ? z.string().optional() : z.string().min(3),
-		address:
+		firstname: type === 'register' ? z.string().min(3,{message:"should be atleast 3 character"}) : z.string().optional(),
+		lastname: type === 'register' ? z.string().min(3,{message:"should be atleast 3 character"}) : z.string().optional(),
+		city:
 			type === 'register'
-				? z.string().optional()
-				: z.string().min(50, { message: 'Enter valid Address' }),
+				? z.string().min(50, { message: 'Enter valid Address' })
+				: z.string().optional(),
 		state:
 			type === 'register'
-				? z.string().optional()
-				: z.string().min(2).max(5, { message: 'enter valid state' }),
+				? z.string().min(2).max(5, { message: 'enter valid state' })
+				: z.string().optional(),
 		postalcode:
 			type === 'register'
-				? z.string().optional()
-				: z.string().min(6, { message: 'enter valid postal code' }),
+				? z.string().min(6, { message: 'enter valid postal code' })
+				: z.string().optional(),
 		ssn:
 			type === 'register'
-				? z.string().optional()
-				: z.string().min(3, { message: 'please enter valid SSN' }),
+				? z.string().min(3, { message: 'please enter valid SSN' })
+				: z.string().optional(),
 		dob:
 			type === 'register'
-				? z.string().optional()
-				: z.string().min(3, { message: 'enter valid date of birth' }),
+				? z.string().min(3, { message: 'enter valid date of birth' })
+				: z.string().optional(),
 
 		email: z.string().email({ message: 'Enter the valid email' }),
 		password: z.string().min(8, { message: 'password should be in minimum 8 character' }),

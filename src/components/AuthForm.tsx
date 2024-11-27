@@ -6,8 +6,7 @@ import { useState } from 'react';
 import Form from './Form';
 
 const AuthForm = ({ type }: { type: string }) => {
-	const [user, setUser] = useState("");
-	const [isLoading, setIsLoading] = useState(false);
+	const [user, setUser] = useState('');
 
 	return (
 		<section className="auth-form">
@@ -29,7 +28,7 @@ const AuthForm = ({ type }: { type: string }) => {
 				<div className="flex flex-col gap-4"></div>
 			) : (
 				<>
-					<Form user={user} isLoading={isLoading} type={type} />
+					<Form user={user} type={type} />
 				</>
 			)}
 		</section>

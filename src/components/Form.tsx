@@ -9,33 +9,41 @@ import CustomForm from './customForm';
 import { LoginForm } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { useState } from 'react';
 
 interface formProp {
 	user: string;
-	isLoading: boolean;
 	type: string;
 }
 
-const FormInput = ({ user, isLoading, type }: formProp) => {
+const FormInput = ({ user, type }: formProp) => {
 	const authForm = LoginForm(type);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const form = useForm<z.infer<typeof authForm>>({
 		resolver: zodResolver(authForm),
 		defaultValues: {
+			firstname: '',
+			lastname: '',
 			email: '',
 			password: '',
+			dob: '',
+			postalcode: '',
+			state: '',
+			city: '',
+			ssn: '',
 		},
 	});
 
-	function onSubmit(values: z.infer<typeof authForm>) {
-		isLoading(true);
+	const onSubmit = async (values: z.infer<typeof authForm>) => {
+		setIsLoading(true);
 		try {
 		} catch (error) {
 			console.log(error);
 		} finally {
-			isLoading(false);
+			setIsLoading(false);
 		}
-	}
+	};
 
 	return (
 		<section>
@@ -60,9 +68,9 @@ const FormInput = ({ user, isLoading, type }: formProp) => {
 
 							<CustomForm
 								control={form.control}
-								label={'Address'}
-								name="address"
-								placeholder={'Enter your Address'}
+								label={'city'}
+								name="city"
+								placeholder={'Enter your city'}
 							/>
 							<div className="flex gap-5">
 								<CustomForm

@@ -2,7 +2,7 @@
 
 import { FormControl, FormField, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Control, FieldPath } from 'react-hook-form';
+import { Control, FieldPath} from 'react-hook-form';
 import { LoginForm } from '@/lib/utils';
 import z from 'zod';
 
