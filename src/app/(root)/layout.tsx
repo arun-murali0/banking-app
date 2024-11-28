@@ -3,9 +3,10 @@ import Image from 'next/image';
 import { ReactNode } from 'react';
 import MobileNavbar from '@/components/MobileNavbar';
 import RightSidebar from '@/components/RightSidebar';
+import { getLoggedInUser } from '@/server-actions/index.action';
 
 export default async function layout({ children }: { children: ReactNode }) {
-	const isLogged = { name: ' arun ' };
+	const isLogged = await getLoggedInUser();
 
 	return (
 		<main className="flex h-screen w-full font-inter">

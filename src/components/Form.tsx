@@ -11,18 +11,17 @@ import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { loginUser, registerNewUser } from '@/server-actions/index.action';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
+import { useAuth } from '@/hooks/useAuth';
 
 interface formProp {
-	user: string;
 	type: string;
-	setUser: (user) => void;
 }
 
-const FormInput = ({ user, type, setUser }: formProp) => {
+const FormInput = ({ type }: formProp) => {
 	const authForm = LoginForm(type);
 	const [isLoading, setIsLoading] = useState(false);
-	const router = useRouter();
+	const { user, setUser } = useAuth();
 
 	const form = useForm<z.infer<typeof authForm>>({
 		resolver: zodResolver(authForm),
@@ -46,20 +45,19 @@ const FormInput = ({ user, type, setUser }: formProp) => {
 				const newUser = await registerNewUser(values);
 				setUser(newUser);
 			}
+
 			if (type === 'login') {
-				const userLoginResponse = await loginUser({
+				const userLogin = await loginUser({
 					email: values.email,
 					password: values.password,
 				});
 
-				if (userLoginResponse) {
-					router.push('/');
+				if (userLogin) {
+					redirect('/');
 				}
 			}
 		} catch (error) {
-			console.log(error);
-		} finally {
-			setIsLoading(false);
+			console.error(error);
 		}
 	};
 

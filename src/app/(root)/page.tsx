@@ -11,7 +11,7 @@ const Home = async () => {
 					{/* user Details */}
 					<HeaderBox
 						title="welcome"
-						user={isLogged?.name || 'guest'}
+						user={isLogged?.name || 'Guest'}
 						type="greeting"
 						subtext="admin"
 					/>

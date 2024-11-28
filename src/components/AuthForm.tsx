@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 import Form from './Form';
+import { useAuth } from '@/hooks/useAuth';
 
 const AuthForm = ({ type }: { type: string }) => {
-	const [user, setUser] = useState('');
+	const { user } = useAuth();
 
 	return (
 		<section className="auth-form">
@@ -28,7 +28,7 @@ const AuthForm = ({ type }: { type: string }) => {
 				<div className="flex flex-col gap-4"></div>
 			) : (
 				<>
-					<Form user={user} type={type} setUser={setUser}/>
+					<Form type={type} />
 				</>
 			)}
 		</section>

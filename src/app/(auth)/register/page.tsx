@@ -1,9 +1,10 @@
 import AuthForm from '@/components/AuthForm';
 
-const register = () => {
+
+const register = async () => {
 	return (
-		<div className='flex-center size-full max-sm:px-5'>
-			<AuthForm type={"register"} />
+		<div className="flex-center size-full max-sm:px-5">
+			<AuthForm type={'register'} />
 		</div>
 	);
 };

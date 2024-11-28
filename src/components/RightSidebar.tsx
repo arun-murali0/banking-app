@@ -10,12 +10,14 @@ const RightSidebar = async ({ transactions, banks, user }: RightSidebarProps) =>
 				<div className="profile-banner">
 					<div className="profile">
 						<div className="profile-img">
-							<span className="text-5xl font-bold text-bankGradient">{user?.name[0]}</span>
+							<span className="text-5xl font-bold text-bankGradient">
+								{user?.name[0].toUpperCase() || 'G'.toUpperCase()}
+							</span>
 						</div>
 					</div>
 				</div>
 				<div className="profile-details mx-6">
-					<div className="profile-name">{user?.name}</div>
+					<div className="profile-name">{user?.name || 'Guest'}</div>
 				</div>
 			</section>
 

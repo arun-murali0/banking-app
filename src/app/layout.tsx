@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, IBM_Plex_Serif } from 'next/font/google';
 import './globals.css';
 import { ReactNode, FC } from 'react';
+import { AuthProvider } from '@/hooks/useAuth';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const ibmPlexSerif = IBM_Plex_Serif({
@@ -30,7 +31,9 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<RootLayoutComponent>{children}</RootLayoutComponent>
+				<RootLayoutComponent>
+					<AuthProvider>{children}</AuthProvider>
+				</RootLayoutComponent>
 			</body>
 		</html>
 	);
