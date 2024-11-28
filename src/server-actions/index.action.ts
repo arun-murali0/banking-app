@@ -19,6 +19,8 @@ export const registerNewUser = async (userData: SignUpParams) => {
 		(await cookies())?.set('Appwrite-session', session?.secret, {
 			path: '/',
 			httpOnly: true,
+			secure: true,
+			maxAge: 60 * 60,
 		});
 
 		return parseStringify(newUser);
@@ -44,6 +46,17 @@ export async function getLoggedInUser() {
 		const { account } = await createSessionClient();
 		const loggedUser = await account.get();
 		return parseStringify(loggedUser);
+	} catch (error) {
+		return null;
+	}
+}
+
+// logout
+export async function userLogout() {
+	try {
+		const { account } = await createAdminClient();
+		(await cookies()).delete('Appwrite-session');
+		await account.deleteSession('current');
 	} catch (error) {
 		return null;
 	}

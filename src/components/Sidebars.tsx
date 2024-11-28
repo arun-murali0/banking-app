@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Footer from './Footer';
 
 const Sidebars = ({ user }: SiderbarProps) => {
 	const pathName = usePathname();
@@ -14,7 +15,7 @@ const Sidebars = ({ user }: SiderbarProps) => {
 			<div className="flex flex-col gap-4">
 				<Link href={'/'} className="flex mb-12 gap-2 items-center">
 					<Image src={'icons/logo.svg'} alt="Logo" width={30} height={30} />
-					<h1 className="sidebar-logo">swift</h1>
+					<div className="sidebar-logo">swift</div>
 				</Link>
 				{sidebarLinks.map((links) => {
 					const isActive = pathName === links.route || pathName?.startsWith(`${links.route}/`);
@@ -37,6 +38,7 @@ const Sidebars = ({ user }: SiderbarProps) => {
 					);
 				})}
 			</div>
+			<Footer user={user} />
 		</section>
 	);
 };

@@ -44,6 +44,7 @@ const FormInput = ({ type }: formProp) => {
 			if (type === 'register') {
 				const newUser = await registerNewUser(values);
 				setUser(newUser);
+				redirect("/")
 			}
 
 			if (type === 'login') {
