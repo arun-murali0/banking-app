@@ -54,11 +54,11 @@ export const createLinkToken = async (user: User) => {
 	try {
 		const tokenParams = {
 			user: {
-				client_user_id: user.$id,
+				client_user_id: user.$id!,
 			},
-			client_name: user.name,
+			client_name: user.name!,
 			products: ['auth'] as Products[],
-			language: 'en',
+			language: 'en'!,
 			country_code: ['US'] as CountryCode[],
 		};
 

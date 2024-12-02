@@ -94,7 +94,7 @@ export const addFundingSource = async ({
 
 		// add funding source to the dwolla customer & get the funding source url
 		const fundingSourceOptions = {
-			customerId: dwollaCustomerId,
+			customerId: dwollaCustomerId!,
 			fundingSourceName: bankName,
 			plaidToken: processorToken,
 			_links: dwollaAuthLinks,
