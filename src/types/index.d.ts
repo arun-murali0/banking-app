@@ -113,7 +113,7 @@ declare type TransferParams = {
 };
 
 declare type AddFundingSourceParams = {
-	dwollaCustomerId: string;
+	dwollaCustomerId?: string;
 	processorToken: string;
 	bankName: string;
 };
@@ -304,7 +304,7 @@ declare interface exchangePublicTokenProps {
 
 declare interface createBankAccountProps {
 	accessToken: string;
-	userId: string;
+	userId?: string;
 	accountId: string;
 	bankId: string;
 	fundingSourceUrl: string;

@@ -1,12 +1,55 @@
 import { plaidApiConfig } from '@/lib/Plaid';
 import { encryptId, parseStringify } from '@/lib/utils';
+import { revalidatePath } from 'next/cache';
 import {
 	CountryCode,
 	ProcessorTokenCreateRequest,
 	ProcessorTokenCreateRequestProcessorEnum,
 	Products,
 } from 'plaid';
+import { addFundingSource } from './Dwolla.action';
+import { createAdminClient } from '@/lib/server/Appwrite';
+import { ID } from 'node-appwrite';
 
+const {
+	APPWRITE_DATABASE_ID: DATABASE_ID,
+	APPWRITE_BANK_COLLECTION_ID: DATABASE_BANK_COLLECTION,
+	APPWRITE_USER_COLLECTION_ID: DATABASE_USER_COLLECTION,
+} = process.env;
+
+
+// create new Bank Account
+const createBankAccount = async ({
+	accountId,
+	accessToken,
+	bankId,
+	fundingSourceUrl,
+	sharableId,
+	userId,
+}: createBankAccountProps) => {
+	try {
+		const { database } = await createAdminClient();
+
+		const bankAccount = await database.createDocument(
+			DATABASE_ID!,
+			DATABASE_BANK_COLLECTION!,
+			ID.unique(),
+			{
+				accountId,
+				accessToken,
+				bankId,
+				fundingSourceUrl,
+				sharableId,
+				userId,
+			}
+		);
+		return parseStringify(bankAccount);
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+// Create plaid Token
 export const createLinkToken = async (user: User) => {
 	try {
 		const tokenParams = {
@@ -26,6 +69,7 @@ export const createLinkToken = async (user: User) => {
 		console.error(error);
 	}
 };
+
 
 export const exchangeToken = async ({ publicToken, user }: exchangePublicTokenProps) => {
 	try {
@@ -55,13 +99,13 @@ export const exchangeToken = async ({ publicToken, user }: exchangePublicTokenPr
 		const processorToken = processTokenResponse.data.processor_token;
 
 		// Funding Source
-		const fundingSourceURL = await addFundingSource({
+		const fundingSourceUrl = await addFundingSource({
 			dwollaCustomerId: user.$id,
 			processorToken,
 			bankName: accountData.name,
 		});
 
-		if (!fundingSourceURL) throw Error;
+		if (!fundingSourceUrl) throw Error;
 
 		// create bank Account
 		await createBankAccount({
@@ -69,8 +113,16 @@ export const exchangeToken = async ({ publicToken, user }: exchangePublicTokenPr
 			bankId: itemId,
 			accountId: accountData.account_id,
 			accessToken,
-			fundingSourceURL,
+			fundingSourceUrl,
 			sharableId: encryptId(accountData.account_id),
+		});
+
+		// check data
+		revalidatePath('/');
+
+		// return success
+		return parseStringify({
+			publicExchangeToken: 'complete',
 		});
 	} catch (error) {
 		console.error(error);
