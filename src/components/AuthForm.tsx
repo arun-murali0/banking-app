@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Form from './Form';
 import { useAuth } from '@/hooks/useAuth';
+import Plaid from '@/components/plaidLink';
 
 const AuthForm = ({ type }: { type: string }) => {
 	const { user } = useAuth();
@@ -24,13 +25,13 @@ const AuthForm = ({ type }: { type: string }) => {
 					</div>
 				</div>
 			</header>
-			{user ? (
-				<div className="flex flex-col gap-4"></div>
-			) : (
-				<>
-					<Form type={type} />
-				</>
-			)}
+			<div className="flex flex-col gap-4">
+				{/* plaid */}
+				<Plaid user={user} variant="primary" />
+			</div>
+			<>
+				<Form type={type} />
+			</>
 		</section>
 	);
 };

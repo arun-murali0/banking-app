@@ -1,4 +1,4 @@
-import { userLogout } from '@/server-actions/index.action';
+import { userLogout } from '@/server-actions/Appwrite.action';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 

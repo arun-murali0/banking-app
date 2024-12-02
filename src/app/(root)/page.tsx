@@ -1,6 +1,6 @@
 import HeaderBox from '@/components/HeaderBox';
 import Transactionbox from '@/components/transactionbox';
-import { getLoggedInUser } from '@/server-actions/index.action';
+import { getLoggedInUser } from '@/server-actions/Appwrite.action';
 
 const Home = async () => {
 	const isLogged = await getLoggedInUser();

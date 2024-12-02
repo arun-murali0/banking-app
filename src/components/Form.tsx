@@ -10,7 +10,7 @@ import { LoginForm } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
-import { loginUser, registerNewUser } from '@/server-actions/index.action';
+import { loginUser, registerNewUser } from '@/server-actions/Appwrite.action';
 import { redirect } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 
@@ -44,7 +44,6 @@ const FormInput = ({ type }: formProp) => {
 			if (type === 'register') {
 				const newUser = await registerNewUser(values);
 				setUser(newUser);
-				redirect("/")
 			}
 
 			if (type === 'login') {

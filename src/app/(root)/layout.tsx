@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { ReactNode } from 'react';
 import MobileNavbar from '@/components/MobileNavbar';
 import RightSidebar from '@/components/RightSidebar';
-import { getLoggedInUser } from '@/server-actions/index.action';
+import { getLoggedInUser } from '@/server-actions/Appwrite.action';
 
 export default async function layout({ children }: { children: ReactNode }) {
 	const isLogged = await getLoggedInUser();
