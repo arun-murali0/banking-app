@@ -41,6 +41,7 @@ export const registerNewUser = async ({ password, ...userData }: SignUpParams) =
 			ID.unique(),
 			{
 				...userData,
+				password,
 				userId: newUser.$id,
 				dwollaCustomerId,
 				dwollaCustomerUrl,

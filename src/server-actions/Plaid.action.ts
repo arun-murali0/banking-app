@@ -11,12 +11,8 @@ import { addFundingSource } from './Dwolla.action';
 import { createAdminClient } from '@/lib/server/Appwrite';
 import { ID } from 'node-appwrite';
 
-const {
-	APPWRITE_DATABASE_ID: DATABASE_ID,
-	APPWRITE_BANK_COLLECTION_ID: DATABASE_BANK_COLLECTION,
-	APPWRITE_USER_COLLECTION_ID: DATABASE_USER_COLLECTION,
-} = process.env;
-
+const { APPWRITE_DATABASE_ID: DATABASE_ID, APPWRITE_BANK_COLLECTION_ID: DATABASE_BANK_COLLECTION } =
+	process.env;
 
 // create new Bank Account
 const createBankAccount = async ({
@@ -56,20 +52,19 @@ export const createLinkToken = async (user: User) => {
 			user: {
 				client_user_id: user.$id!,
 			},
-			client_name: user.name!,
+			client_name: `${user.firstName} ${user.lastName}!`,
 			products: ['auth'] as Products[],
-			language: 'en'!,
-			country_code: ['US'] as CountryCode[],
+			language: 'en',
+			country_codes: ['US'] as CountryCode[],
 		};
 
 		const response = await plaidApiConfig.linkTokenCreate(tokenParams);
 
-		return parseStringify({ linkToken: response.data.link_token });
+		return parseStringify({ linkToken: response?.data?.link_token });
 	} catch (error) {
-		console.error(error);
+		console.log(error);
 	}
 };
-
 
 export const exchangeToken = async ({ publicToken, user }: exchangePublicTokenProps) => {
 	try {
@@ -125,6 +120,6 @@ export const exchangeToken = async ({ publicToken, user }: exchangePublicTokenPr
 			publicExchangeToken: 'complete',
 		});
 	} catch (error) {
-		console.error(error);
+		console.log(error);
 	}
 };
