@@ -181,8 +181,15 @@ export const getTransactionStatus = (date: Date) => {
 
 export const LoginForm = (type: string) =>
 	z.object({
-		firstname: type === 'register' ? z.string().min(3,{message:"should be atleast 3 character"}) : z.string().optional(),
-		lastname: type === 'register' ? z.string().min(3,{message:"should be atleast 3 character"}) : z.string().optional(),
+		firstName:
+			type === 'register'
+				? z.string().min(3, { message: 'should be atleast 3 character' })
+				: z.string().optional(),
+		lastName:
+			type === 'register'
+				? z.string().min(3, { message: 'should be atleast 3 character' })
+				: z.string().optional(),
+		address1: type === 'register' ? z.string().max(50) : z.string().optional(),
 		city:
 			type === 'register'
 				? z.string().max(50, { message: 'Enter valid Address' })
@@ -199,7 +206,7 @@ export const LoginForm = (type: string) =>
 			type === 'register'
 				? z.string().min(3, { message: 'please enter valid SSN' })
 				: z.string().optional(),
-		dob:
+		dateOfBirth:
 			type === 'register'
 				? z.string().min(3, { message: 'enter valid date of birth' })
 				: z.string().optional(),

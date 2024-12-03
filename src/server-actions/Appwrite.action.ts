@@ -6,26 +6,24 @@ import { cookies } from 'next/headers';
 import { ID } from 'node-appwrite';
 import { createDwollaCustomer } from './Dwolla.action';
 
-const {
-	APPWRITE_DATABASE_ID: DATABASE_ID,
-	APPWRITE_BANK_COLLECTION_ID: DATABASE_BANK_COLLECTION,
-	APPWRITE_USER_COLLECTION_ID: DATABASE_USER_COLLECTION,
-} = process.env;
+const { APPWRITE_DATABASE_ID: DATABASE_ID, APPWRITE_USER_COLLECTION_ID: DATABASE_USER_COLLECTION } =
+	process.env;
 
 // new User
-export const registerNewUser = async (userData: SignUpParams) => {
-	const { email, password, firstname, lastname } = userData;
+export const registerNewUser = async ({ password, ...userData }: SignUpParams) => {
+	const { email, firstName, lastName } = userData;
 
 	let newUser;
 	try {
 		const { account, database } = await createAdminClient();
 
-		newUser = await account.create(ID.unique(), email, password, `${firstname} ${lastname}`);
+		newUser = await account.create(ID.unique(), email, password, `${firstName} ${lastName}`);
 		const session = await account.createEmailPasswordSession(email, password);
 
 		if (!newUser) {
 			throw new Error('error creating a new User');
 		}
+
 		const dwollaCustomerUrl = await createDwollaCustomer({
 			...userData,
 			type: 'personal',
@@ -58,8 +56,8 @@ export const registerNewUser = async (userData: SignUpParams) => {
 		});
 
 		return parseStringify(newCustomer);
-	} catch (error) {
-		console.error(error);
+	} catch (error:any) {
+		console.error(error.message);
 	}
 };
 

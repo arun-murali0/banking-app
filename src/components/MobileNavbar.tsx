@@ -39,7 +39,7 @@ const MobileNavbar = ({ user }: MobileNavProps) => {
 							<div className="mobilenav-sheet">
 								<SheetClose asChild>
 									<div>
-										<nav className="flex flex-col gap-4 h-full pt-6 text-white">
+										<div className="flex flex-col gap-4 h-full pt-6 text-white">
 											{sidebarLinks.map((links) => {
 												const isActive =
 													pathName === links.route || pathName?.startsWith(`${links.route}/`);
@@ -70,7 +70,7 @@ const MobileNavbar = ({ user }: MobileNavProps) => {
 													</SheetClose>
 												);
 											})}
-										</nav>
+										</div>
 										<Footer user={user} type={'mobile'} />
 									</div>
 								</SheetClose>

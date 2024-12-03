@@ -26,11 +26,12 @@ const FormInput = ({ type }: formProp) => {
 	const form = useForm<z.infer<typeof authForm>>({
 		resolver: zodResolver(authForm),
 		defaultValues: {
-			firstname: '',
-			lastname: '',
+			firstName: '',
+			lastName: '',
 			email: '',
 			password: '',
-			dob: '',
+			dateOfBirth: '',
+			address1: '',
 			postalcode: '',
 			state: '',
 			city: '',
@@ -38,18 +39,33 @@ const FormInput = ({ type }: formProp) => {
 		},
 	});
 
-	const onSubmit = async (values: z.infer<typeof authForm>) => {
+	const onSubmit = async (data: z.infer<typeof authForm>) => {
 		setIsLoading(true);
 		try {
+			// sign Up
 			if (type === 'register') {
-				const newUser = await registerNewUser(values);
+				const userDetails = {
+					firstName: data.firstName!,
+					lastName: data.lastName!,
+					email: data.email!,
+					password: data.password!,
+					city: data.city!,
+					ssn: data.ssn!,
+					dateOfBirth: data.dateOfBirth!,
+					address1: data.address1!,
+					postalCode: data.postalcode!,
+					state: data.state!,
+				};
+
+				const newUser = await registerNewUser(userDetails);
 				setUser(newUser);
 			}
 
+			// Login
 			if (type === 'login') {
 				const userLogin = await loginUser({
-					email: values.email,
-					password: values.password,
+					email: data.email,
+					password: data.password,
 				});
 
 				if (userLogin) {
@@ -71,16 +87,23 @@ const FormInput = ({ type }: formProp) => {
 								<CustomForm
 									control={form.control}
 									label={'Firstname'}
-									name="firstname"
+									name="firstName"
 									placeholder={'firstname'}
 								/>
 								<CustomForm
 									control={form.control}
 									label={'Lastname'}
-									name="lastname"
+									name="lastName"
 									placeholder={'lastname'}
 								/>
 							</div>
+
+							<CustomForm
+								control={form.control}
+								label={'address 1'}
+								name="address1"
+								placeholder={'Enter your city'}
+							/>
 
 							<CustomForm
 								control={form.control}
@@ -106,7 +129,7 @@ const FormInput = ({ type }: formProp) => {
 								<CustomForm
 									control={form.control}
 									label={'Date of Birth'}
-									name="dob"
+									name="dateOfBirth"
 									placeholder={'DD-MM-YYYY'}
 								/>
 								<CustomForm

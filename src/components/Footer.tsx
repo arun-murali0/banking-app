@@ -19,7 +19,7 @@ const Footer = ({ user, type = 'desktop' }: FooterProps) => {
 					<div className={type === 'mobile' ? 'footer_email-mobile' : 'footer_email'}>
 						<h3 className="text-14 font-semibold truncate text-gray-700">{user?.name}</h3>
 
-						<p className="text-14 font-normal truncate text-gray-500">{user?.email}</p>
+						<div className="text-14 font-normal truncate text-gray-500">{user?.email}</div>
 					</div>
 
 					<div className="footer_image" onClick={handleLogout}>

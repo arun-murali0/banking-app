@@ -8,13 +8,14 @@ declare type SearchParamProps = {
 // ========================================
 
 declare type SignUpParams = {
-	firstname?: string;
-	lastname?: string;
-	city?: string;
-	state?: string;
-	postalCode?: string;
-	dob?: string;
-	ssn?: string;
+	firstName: string;
+	lastName: string;
+	city: string;
+	state: string;
+	address1: string;
+	postalCode: string;
+	dateOfBirth: string;
+	ssn: string;
 	email: string;
 	password: string;
 };
@@ -123,9 +124,9 @@ declare type NewDwollaCustomerParams = {
 	lastName: string;
 	email: string;
 	type: string;
-	address1: string;
 	city: string;
 	state: string;
+	address1: string;
 	postalCode: string;
 	dateOfBirth: string;
 	ssn: string;
@@ -172,15 +173,6 @@ declare interface PlaidLinkProps {
 	variant?: 'primary' | 'ghost';
 	dwollaCustomerId?: string;
 }
-
-// declare type User = sdk.Models.Document & {
-//   accountId: string;
-//   email: string;
-//   name: string;
-//   items: string[];
-//   accessToken: string;
-//   image: string;
-// };
 
 declare interface AuthFormProps {
 	type: 'sign-in' | 'sign-up';
