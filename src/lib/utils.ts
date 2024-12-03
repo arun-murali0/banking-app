@@ -200,11 +200,11 @@ export const LoginForm = (type: string) =>
 				: z.string().optional(),
 		postalcode:
 			type === 'register'
-				? z.string().min(6, { message: 'enter valid postal code' })
+				? z.string().min(5, { message: 'enter valid postal code' })
 				: z.string().optional(),
 		ssn:
 			type === 'register'
-				? z.string().min(3, { message: 'please enter valid SSN' })
+				? z.string().min(4, { message: 'please enter valid SSN' })
 				: z.string().optional(),
 		dateOfBirth:
 			type === 'register'
